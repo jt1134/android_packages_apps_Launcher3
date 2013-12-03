@@ -1042,9 +1042,15 @@ public class Launcher extends Activity
             }
         }
 
-        // Eat the long press event so the keyboard doesn't come up.
-        if (keyCode == KeyEvent.KEYCODE_MENU && event.isLongPress()) {
-            return true;
+        if (keyCode == KeyEvent.KEYCODE_MENU) {
+            // Eat the long press event so the keyboard doesn't come up.
+            if (event.isLongPress()) {
+                return true;
+            }
+            // Don't bring up the tab widget unless on the home screen.
+            if (mWorkspace != null && mWorkspace.isSmall()) {
+                return true;
+            }
         }
 
         return handled;
